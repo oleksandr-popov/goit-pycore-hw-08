@@ -11,7 +11,7 @@ from entities import AddressBook, Record, \
     CONGRATULATION_DATE_KEY, USER_KEY
 from helpers import input_error
 
-SUPPORTED_COMMANDS_INFO = """
+ASSISTANT_INFO = """
 ==================== ASSISTANT BOT COMMANDS ====================
 
 Contacts Management:
@@ -229,7 +229,7 @@ def format_info():
     Returns:
         str: Supported commands info.
     """
-    return SUPPORTED_COMMANDS_INFO
+    return ASSISTANT_INFO
 
 
 def load_address_book(filename: str) -> AddressBook:
