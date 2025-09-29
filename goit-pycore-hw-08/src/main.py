@@ -11,6 +11,7 @@ from entities import AddressBook, Record, \
     CONGRATULATION_DATE_KEY, USER_KEY
 from helpers import input_error
 
+# Description of what program can do
 ASSISTANT_INFO = """
 ==================== ASSISTANT BOT COMMANDS ====================
 
@@ -19,6 +20,11 @@ Contacts Management:
   change <name> <old> <new>    Change a contact's phone number
   phone <name>                 Show all phone numbers for a contact
   clear                        Remove all contacts from the address book
+
+Birthday Management:
+  add-birthday <name> <date>   Add a birthday to a contact (format: DD.MM.YYYY)
+  show-birthday <name>         Show the birthday for a contact
+  birthdays                    List all upcoming birthdays in the next 7 days
 
 General:
   all                          Show all saved contacts
@@ -55,14 +61,11 @@ def use_case():
     while True:
         user_input = input("Enter a command: ")
         command, *args = parse_input(user_input)
-        if command in ["close", "exit"]:
-            save_address_book(address_book, CACHE_FILE_NAME)
-            print("Good bye!")
-            break
+       
+        if command == "info":
+            print(format_info())
         elif command == "hello":
             print("Hi!")
-        elif command == "info":
-            print(format_info())
         elif command == "add":
             print(add_contact(args, address_book))
         elif command == "change":
@@ -77,6 +80,13 @@ def use_case():
             print(birthdays(args, address_book))
         elif command == "all":
             print(output_all_contacts(address_book))
+        elif command in "close":
+            print("Good bye!")
+            save_address_book(address_book, CACHE_FILE_NAME)
+            break
+        elif command == "exit":
+            save_address_book(address_book, CACHE_FILE_NAME)
+            break
         else:
             print("Invalid command.")
 
